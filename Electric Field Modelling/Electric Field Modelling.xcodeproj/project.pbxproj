@@ -15,6 +15,7 @@
 		D3358087270238CC007E174D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3358085270238CC007E174D /* Main.storyboard */; };
 		D3358089270238D0007E174D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3358088270238D0007E174D /* Assets.xcassets */; };
 		D335808C270238D0007E174D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D335808A270238D0007E174D /* LaunchScreen.storyboard */; };
+		D34FD3B727024DE0001F7A3D /* PhysicalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		D3358086270238CC007E174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3358088270238D0007E174D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D335808B270238D0007E174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalObjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				D335807D270238CC007E174D /* GameScene.sks */,
 				D335807F270238CC007E174D /* Actions.sks */,
 				D3358081270238CC007E174D /* GameScene.swift */,
+				D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */,
 				D3358083270238CC007E174D /* GameViewController.swift */,
 				D3358085270238CC007E174D /* Main.storyboard */,
 				D3358088270238D0007E174D /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 				D3358082270238CC007E174D /* GameScene.swift in Sources */,
 				D3358084270238CC007E174D /* GameViewController.swift in Sources */,
 				D335807C270238CC007E174D /* AppDelegate.swift in Sources */,
+				D34FD3B727024DE0001F7A3D /* PhysicalObjects.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
