@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Vector{
     var x: Double
@@ -34,5 +35,20 @@ class Vector{
             + pow( (self.y-secondVector.y), 2),
             0.5
         )
+    }
+}
+
+class Point{
+    var x, y, q, mass: Double
+    
+    var coord: CGPoint {
+        CGPoint(x: x, y: y)
+    }
+    
+    init(x: Double, y: Double, q: Double = 1, mass: Double = 1){
+        self.x = x
+        self.y = y
+        self.q = q
+        self.mass = mass
     }
 }
