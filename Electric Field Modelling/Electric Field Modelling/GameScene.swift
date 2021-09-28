@@ -32,7 +32,6 @@ class GameScene: SKScene {
         Point(x: 400, y: -400)
     ]
     
-    
     func setCharges(charges: [Point]){
         for charge in charges{
             let node = SKShapeNode(circleOfRadius: 10)
@@ -42,7 +41,6 @@ class GameScene: SKScene {
         }
     }
     
-    
     func setMainCharge(mainChargeCoordinates: CGPoint){
         mainCharge = SKShapeNode(circleOfRadius: 20)
         mainCharge.position = mainChargeCoordinates
@@ -51,14 +49,14 @@ class GameScene: SKScene {
     
     func getInten() -> [[CGPoint]] {
         var res: [[CGPoint]] = []
-        for x in stride(from: -500.0, to: 520.0, by: 25){
-            for y in stride(from: -400.0, to: 400.0, by: 25){
+        for x in stride(from: -500.0, to: 520.0, by: 23){
+            for y in stride(from: -400.0, to: 400.0, by: 23){
                 let point: Point = Point(x: x, y: y)
-                var inten = u.intensity(coord: point.coord)
+                var inten = u.intensity(coord: point.vectorCoord())
                 
                 inten = inten
                     .div( inten.mod( Vector(x: 0, y: 0)) )
-                    .mult(35)
+                    .mult(40)
                     .div(2)
                 
                 res.append(
@@ -81,10 +79,11 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        self.physicsBody?.isDynamic = false
         
         setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
         u.setPoints(points: charges +
-            [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
+                    [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 1.0)]
         )
         
         let res: [[CGPoint]] = getInten()
@@ -96,23 +95,21 @@ class GameScene: SKScene {
     
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
-            
             let touchLocation = touch.location(in: self)
-            self.removeAllChildren()
-
             mainCharge.position.x = touchLocation.x
             mainCharge.position.y = touchLocation.y
-            
-            u.resetPoints(points: charges +
-                [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
-            )
-
-            let res: [[CGPoint]] = getInten()
-            drawLines(res: res)
-            setCharges(charges: charges)
-            self.addChild(mainCharge)
         }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        self.removeAllChildren()
+        u.resetPoints(points: charges +
+                      [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
+        )
+        let res: [[CGPoint]] = getInten()
+        drawLines(res: res)
+        setCharges(charges: charges)
+        self.addChild(mainCharge)
     }
 }
