@@ -13,24 +13,22 @@ class GameScene: SKScene {
     var mainCharge: SKShapeNode!
     var u: InteractionField! = InteractionField()
     let charges: [Point] = [
-        Point(x: 400, y: 400),
-        Point(x: 400, y: 350),
-        Point(x: 400, y: 300),
-        Point(x: 400, y: 250),
-        Point(x: 400, y: 200),
-        Point(x: 400, y: 150),
-        Point(x: 400, y: 100),
-        Point(x: 400, y: 50),
-        Point(x: 400, y: 0),
-        Point(x: 400, y: -50),
-        Point(x: 400, y: -100),
-        Point(x: 400, y: -150),
-        Point(x: 400, y: -200),
-        Point(x: 400, y: -250),
-        Point(x: 400, y: -300),
-        Point(x: 400, y: -350),
-        Point(x: 400, y: -400)
+//        Point(x: 400, y: 250),
+//        Point(x: 400, y: 200),
+//        Point(x: 400, y: 150),
+//        Point(x: 400, y: 100),
+//        Point(x: 400, y: 50),
+//        Point(x: 400, y: 0),
+//        Point(x: 400, y: -50),
+//        Point(x: 400, y: -100),
+//        Point(x: 400, y: -150),
+//        Point(x: 400, y: -200),
+//        Point(x: 400, y: -250)
+        
+        Point(x: 200, y: 200, q: 1.0),
+        Point(x: -200, y: 200, q: 10.0)
     ]
+    
     
     func setCharges(charges: [Point]){
         for charge in charges{
@@ -41,22 +39,24 @@ class GameScene: SKScene {
         }
     }
     
+    
     func setMainCharge(mainChargeCoordinates: CGPoint){
         mainCharge = SKShapeNode(circleOfRadius: 20)
         mainCharge.position = mainChargeCoordinates
         mainCharge.fillColor = UIColor.blue
     }
     
+    
     func getInten() -> [[CGPoint]] {
         var res: [[CGPoint]] = []
-        for x in stride(from: -500.0, to: 520.0, by: 23){
-            for y in stride(from: -400.0, to: 400.0, by: 23){
+        for x in stride(from: -500.0, to: 520.0, by: 20){
+            for y in stride(from: -400.0, to: 400.0, by: 20){
                 let point: Point = Point(x: x, y: y)
                 var inten = u.intensity(coord: point.vectorCoord())
                 
                 inten = inten
                     .div( inten.mod( Vector(x: 0, y: 0)) )
-                    .mult(40)
+                    .mult(32)
                     .div(2)
                 
                 res.append(
@@ -67,6 +67,7 @@ class GameScene: SKScene {
             }
         return res
     }
+    
     
     func drawLines(res: [[CGPoint]]){
         for _points in res{
@@ -89,7 +90,6 @@ class GameScene: SKScene {
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
         setCharges(charges: charges)
-
         self.addChild(mainCharge)
     }
     
@@ -101,6 +101,7 @@ class GameScene: SKScene {
             mainCharge.position.y = touchLocation.y
         }
     }
+    
     
     override func update(_ currentTime: TimeInterval) {
         self.removeAllChildren()

@@ -76,9 +76,7 @@ class Point{
 class InteractionField{
     var points: [Point] = []
     
-    func F(p1: Point, p2: Point, distance: Double) -> Double {
-        300000 * (-1.0) * p1.q * p2.q / (pow(distance, 2) + 0.1)
-    }
+    func F(p1: Point, p2: Point, distance: Double) -> Double {( 300000 * (-1.0) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)}
     
     func intensity(coord: Vector) -> Vector{
         var proj = Vector(x: 0, y: 0)
