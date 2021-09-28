@@ -25,8 +25,9 @@ class GameScene: SKScene {
 //        Point(x: 400, y: -200),
 //        Point(x: 400, y: -250)
         
-        Point(x: 200, y: 200, q: 1.0),
-        Point(x: -200, y: 200, q: 10.0)
+        Point(x: -300, y: -300),
+        Point(x: 300, y: 300)
+//        Point(x: -200, y: 200, q: 10.0)
     ]
     
     
@@ -72,6 +73,9 @@ class GameScene: SKScene {
     func drawLines(res: [[CGPoint]]){
         for _points in res{
             var points = _points
+            if points[0].x.isNaN {
+                continue
+            }
             let node = SKShapeNode(points: &points, count: points.count)
             self.addChild(node)
         }
@@ -84,9 +88,8 @@ class GameScene: SKScene {
         
         setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
         u.setPoints(points: charges +
-                    [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 1.0)]
+                    [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
         )
-        
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
         setCharges(charges: charges)

@@ -55,17 +55,16 @@ class Vector{
 }
 
 class Point{
-    var x, y, q, mass: Double
+    var x, y, q: Double
 
     func vectorCoord() -> Vector{
         Vector(x: x, y: y)
     }
     
-    init(x: Double, y: Double, q: Double = 1, mass: Double = 1){
+    init(x: Double, y: Double, q: Double = 1){
         self.x = x
         self.y = y
         self.q = q
-        self.mass = mass
     }
     
     func CGPCoord() -> CGPoint{
@@ -76,7 +75,9 @@ class Point{
 class InteractionField{
     var points: [Point] = []
     
-    func F(p1: Point, p2: Point, distance: Double) -> Double {( 300000 * (-1.0) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)}
+    func F(p1: Point, p2: Point, distance: Double) -> Double {
+        ( 300000 * (-1.0) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
+    }
     
     func intensity(coord: Vector) -> Vector{
         var proj = Vector(x: 0, y: 0)
