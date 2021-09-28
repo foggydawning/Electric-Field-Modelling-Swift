@@ -55,42 +55,55 @@ class Vector{
 }
 
 class Point{
-    var x, y, q, mass: Double
-    
-    var coord: Vector {
+    var x, y, q: Double
+
+    func vectorCoord() -> Vector{
         Vector(x: x, y: y)
     }
     
-    init(x: Double, y: Double, q: Double = 1, mass: Double = 1){
+    init(x: Double, y: Double, q: Double = 1){
         self.x = x
         self.y = y
         self.q = q
-        self.mass = mass
+    }
+    
+    func CGPCoord() -> CGPoint{
+        CGPoint(x: self.x, y: self.y)
     }
 }
 
 class InteractionField{
-    var points: [Point]
-    init(points: [Point]){
-        self.points = points
-    }
+    var points: [Point] = []
     
     func F(p1: Point, p2: Point, distance: Double) -> Double {
-        300000 * -p1.q * p2.q / (pow(distance, 2) + 0.1)
+        ( 300000 * (-1.0) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
     }
     
     func intensity(coord: Vector) -> Vector{
         var proj = Vector(x: 0, y: 0)
         let single_point = Point(x: 0, y: 0)
-        for p in self.points{
-            if coord.mod(p.coord) < pow(10, -10){
+        for point in self.points{
+            let pointCoordinate = point.vectorCoord()
+            if coord.mod(pointCoordinate) < pow(10, -10){
                 continue
             }
-            let dif = p.coord.mod(coord)
-            let fmod = self.F(p1: single_point, p2: p, distance: dif) * (-1)
-            proj = coord.diff(p.coord).div(dif).mult(fmod).add(proj)
+            let dif = pointCoordinate.mod(coord)
+            let fmod = self.F(p1: single_point,
+                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y, q: point.q),
+                              distance: dif) * (-1)
+            proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
         }
         return proj
     }
     
+    func setPoints(points: [Point]) {
+        for point in points{
+            self.points.append(point)
+        }
+    }
+    
+    func resetPoints(points: [Point]) {
+        self.points = []
+        setPoints(points: points)
+    }
 }
