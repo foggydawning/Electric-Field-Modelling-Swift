@@ -11,32 +11,40 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var firstCharge: SKShapeNode!
-    var secondCharge: SKShapeNode!
-    var thirdCharge: SKShapeNode!
-    var u: InteractionField!
+    var u: InteractionField! = InteractionField()
+    let charges: [CGPoint] = [
+        CGPoint(x: 200, y: 200),
+        CGPoint(x: 200, y: -200)
+    ]
+    
+    
+    func setCharges(charges: [CGPoint]){
+        for charge in charges{
+            let node = SKShapeNode(circleOfRadius: 10)
+            node.position = charge
+            node.fillColor = UIColor.blue
+            self.addChild(node)
+        }
+    }
+    
+    
+    func setMainCharge(mainChargeCoordinates: CGPoint){
+        firstCharge = SKShapeNode(circleOfRadius: 20)
+        firstCharge.position = mainChargeCoordinates
+        firstCharge.fillColor = UIColor.blue
+    }
+
     
     override func didMove(to view: SKView) {
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsWorld.contactDelegate = self
         
-        firstCharge = SKShapeNode(circleOfRadius: 20)
-        firstCharge.position = CGPoint(x: -200, y: -200)
-        firstCharge.fillColor = UIColor.blue
         
-        secondCharge = SKShapeNode(circleOfRadius: 10)
-        secondCharge.position = CGPoint(x: 200, y: 200)
-        secondCharge.fillColor = UIColor.blue
-        
-        thirdCharge = SKShapeNode(circleOfRadius: 10)
-        thirdCharge.position = CGPoint(x: 200, y: -200)
-        thirdCharge.fillColor = UIColor.blue
-        
-        u = InteractionField(points: [
-            Point(x: firstCharge.position.x, y: firstCharge.position.y, q: 2.0),
-            Point(x: secondCharge.position.x, y: secondCharge.position.y),
-            Point(x: thirdCharge.position.x, y: thirdCharge.position.y)
-        ])
+        setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
+        u.setPoints(pointsCoordinates: charges +
+            [CGPoint(x: firstCharge.position.x , y: firstCharge.position.y)]
+        )
         
         var res: [[CGPoint]] = []
         
@@ -58,11 +66,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var points = _points
             self.addChild(SKShapeNode(points: &points, count: points.count))
         }
-
-        
+        setCharges(charges: charges)
         self.addChild(firstCharge)
-        self.addChild(secondCharge)
-        self.addChild(thirdCharge)
     }
     
 
@@ -71,17 +76,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchLocation = touch.location(in: self)
                 
                 self.removeAllChildren()
-                self.addChild(firstCharge)
-                self.addChild(secondCharge)
-                self.addChild(thirdCharge)
+    
                 firstCharge.position.x = touchLocation.x
                 firstCharge.position.y = touchLocation.y
+            
                 var res: [[CGPoint]] = []
-                u = InteractionField(points: [
-                    Point(x: firstCharge.position.x, y: firstCharge.position.y, q: 2.0),
-                    Point(x: secondCharge.position.x, y: secondCharge.position.y),
-                    Point(x: thirdCharge.position.x, y: thirdCharge.position.y)
-                ])
+            
+                u.resetPoints(pointsCoordinates: charges +
+                    [CGPoint(x: firstCharge.position.x , y: firstCharge.position.y)]
+                )
+            
                 for x in stride(from: -500.0, to: 520, by: 15){
                     for y in stride(from: -400.0, to: 400.0, by: 15){
                         var inten = u.intensity(coord: Vector(x: Double(x), y: Double(y)))
@@ -100,17 +104,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     var points = _points
                     self.addChild(SKShapeNode(points: &points, count: points.count))
                 }
-                
-                
-                
-            
+                setCharges(charges: charges)
+                self.addChild(firstCharge)
         }
-        
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-
-    }
-    
- 
 }

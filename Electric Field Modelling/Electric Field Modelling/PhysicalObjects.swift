@@ -70,10 +70,7 @@ class Point{
 }
 
 class InteractionField{
-    var points: [Point]
-    init(points: [Point]){
-        self.points = points
-    }
+    var points: [CGPoint] = []
     
     func F(p1: Point, p2: Point, distance: Double) -> Double {
         300000 * -p1.q * p2.q / (pow(distance, 2) + 0.1)
@@ -82,15 +79,30 @@ class InteractionField{
     func intensity(coord: Vector) -> Vector{
         var proj = Vector(x: 0, y: 0)
         let single_point = Point(x: 0, y: 0)
-        for p in self.points{
-            if coord.mod(p.coord) < pow(10, -10){
+        for point in self.points{
+            let pointCoordinate = Vector(x: point.x, y: point.y)
+            if coord.mod(pointCoordinate) < pow(10, -10){
                 continue
             }
-            let dif = p.coord.mod(coord)
-            let fmod = self.F(p1: single_point, p2: p, distance: dif) * (-1)
-            proj = coord.diff(p.coord).div(dif).mult(fmod).add(proj)
+            let dif = pointCoordinate.mod(coord)
+            let fmod = self.F(p1: single_point,
+                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y),
+                              distance: dif) * (-1)
+            proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
         }
         return proj
     }
     
+    func setPoints(pointsCoordinates: [CGPoint]) {
+        for pointCoordinates in pointsCoordinates{
+            self.points.append(pointCoordinates)
+        }
+    }
+    
+    func resetPoints(pointsCoordinates: [CGPoint]) {
+        self.points = []
+        for pointCoordinates in pointsCoordinates{
+            self.points.append(pointCoordinates)
+        }
+    }
 }
