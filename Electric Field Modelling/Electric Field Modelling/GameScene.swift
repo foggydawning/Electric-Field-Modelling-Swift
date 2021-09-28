@@ -8,20 +8,35 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     
-    var firstCharge: SKShapeNode!
+    var mainCharge: SKShapeNode!
     var u: InteractionField! = InteractionField()
-    let charges: [CGPoint] = [
-        CGPoint(x: 200, y: 200),
-        CGPoint(x: 200, y: -200)
+    let charges: [Point] = [
+        Point(x: 400, y: 400),
+        Point(x: 400, y: 350),
+        Point(x: 400, y: 300),
+        Point(x: 400, y: 250),
+        Point(x: 400, y: 200),
+        Point(x: 400, y: 150),
+        Point(x: 400, y: 100),
+        Point(x: 400, y: 50),
+        Point(x: 400, y: 0),
+        Point(x: 400, y: -50),
+        Point(x: 400, y: -100),
+        Point(x: 400, y: -150),
+        Point(x: 400, y: -200),
+        Point(x: 400, y: -250),
+        Point(x: 400, y: -300),
+        Point(x: 400, y: -350),
+        Point(x: 400, y: -400)
     ]
     
     
-    func setCharges(charges: [CGPoint]){
+    func setCharges(charges: [Point]){
         for charge in charges{
             let node = SKShapeNode(circleOfRadius: 10)
-            node.position = charge
+            node.position = charge.CGPCoord()
             node.fillColor = UIColor.blue
             self.addChild(node)
         }
@@ -29,83 +44,75 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func setMainCharge(mainChargeCoordinates: CGPoint){
-        firstCharge = SKShapeNode(circleOfRadius: 20)
-        firstCharge.position = mainChargeCoordinates
-        firstCharge.fillColor = UIColor.blue
+        mainCharge = SKShapeNode(circleOfRadius: 20)
+        mainCharge.position = mainChargeCoordinates
+        mainCharge.fillColor = UIColor.blue
+    }
+    
+    func getInten() -> [[CGPoint]] {
+        var res: [[CGPoint]] = []
+        for x in stride(from: -500.0, to: 520.0, by: 25){
+            for y in stride(from: -400.0, to: 400.0, by: 25){
+                let point: Point = Point(x: x, y: y)
+                var inten = u.intensity(coord: point.coord)
+                
+                inten = inten
+                    .div( inten.mod( Vector(x: 0, y: 0)) )
+                    .mult(35)
+                    .div(2)
+                
+                res.append(
+                    [CGPoint(x: x - inten.x, y: y - inten.y),
+                    CGPoint(x: x + inten.x, y: y + inten.y)
+                    ])
+                }
+            }
+        return res
+    }
+    
+    func drawLines(res: [[CGPoint]]){
+        for _points in res{
+            var points = _points
+            let node = SKShapeNode(points: &points, count: points.count)
+            self.addChild(node)
+        }
     }
 
     
     override func didMove(to view: SKView) {
-        
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsWorld.contactDelegate = self
-        
         
         setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
-        u.setPoints(pointsCoordinates: charges +
-            [CGPoint(x: firstCharge.position.x , y: firstCharge.position.y)]
+        u.setPoints(points: charges +
+            [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
         )
         
-        var res: [[CGPoint]] = []
-        
-        for x in stride(from: -500.0, to: 520, by: 15){
-            for y in stride(from: -400.0, to: 400.0, by: 15){
-                var inten = u.intensity(coord: Vector(x: Double(x), y: Double(y)))
-                inten = inten.div( inten.mod( Vector(x: 0, y: 0)) ).mult(30)
-                inten = inten.div(2)
-                res.append(
-                    [
-                        CGPoint(x: Double(x) - inten.x, y: Double(y) - inten.y),
-                        CGPoint(x: Double(x) + inten.x, y: Double(y) + inten.y)
-                    ]
-                )
-            }
-        }
-        
-        for _points in res{
-            var points = _points
-            self.addChild(SKShapeNode(points: &points, count: points.count))
-        }
+        let res: [[CGPoint]] = getInten()
+        drawLines(res: res)
         setCharges(charges: charges)
-        self.addChild(firstCharge)
+
+        self.addChild(mainCharge)
     }
     
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first{
+        
+        for touch in touches {
+            
             let touchLocation = touch.location(in: self)
-                
-                self.removeAllChildren()
-    
-                firstCharge.position.x = touchLocation.x
-                firstCharge.position.y = touchLocation.y
+            self.removeAllChildren()
+
+            mainCharge.position.x = touchLocation.x
+            mainCharge.position.y = touchLocation.y
             
-                var res: [[CGPoint]] = []
-            
-                u.resetPoints(pointsCoordinates: charges +
-                    [CGPoint(x: firstCharge.position.x , y: firstCharge.position.y)]
-                )
-            
-                for x in stride(from: -500.0, to: 520, by: 15){
-                    for y in stride(from: -400.0, to: 400.0, by: 15){
-                        var inten = u.intensity(coord: Vector(x: Double(x), y: Double(y)))
-                        inten = inten.div( inten.mod( Vector(x: 0, y: 0)) ).mult(30)
-                        inten = inten.div(2)
-                        res.append(
-                            [
-                                CGPoint(x: Double(x) - inten.x, y: Double(y) - inten.y),
-                                CGPoint(x: Double(x) + inten.x, y: Double(y) + inten.y)
-                            ]
-                        )
-                    }
-                }
-                
-                for _points in res{
-                    var points = _points
-                    self.addChild(SKShapeNode(points: &points, count: points.count))
-                }
-                setCharges(charges: charges)
-                self.addChild(firstCharge)
+            u.resetPoints(points: charges +
+                [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
+            )
+
+            let res: [[CGPoint]] = getInten()
+            drawLines(res: res)
+            setCharges(charges: charges)
+            self.addChild(mainCharge)
         }
     }
 }
