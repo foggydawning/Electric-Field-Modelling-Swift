@@ -89,13 +89,9 @@ class InteractionField{
             }
             let dif = pointCoordinate.mod(coord)
             let fmod = self.F(p1: single_point,
-                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y),
+                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y, q: point.q),
                               distance: dif) * (-1)
-            proj = coord
-                    .diff(pointCoordinate)
-                    .div(dif)
-                    .mult(fmod)
-                    .add(proj)
+            proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
         }
         return proj
     }

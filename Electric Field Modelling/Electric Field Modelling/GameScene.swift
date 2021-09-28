@@ -25,7 +25,7 @@ class GameScene: SKScene {
 //        Point(x: 400, y: -200),
 //        Point(x: 400, y: -250)
         
-        Point(x: -300, y: -300),
+        Point(x: -300, y: -300, q: -1),
         Point(x: 300, y: 300)
 //        Point(x: -200, y: 200, q: 10.0)
     ]
@@ -35,7 +35,11 @@ class GameScene: SKScene {
         for charge in charges{
             let node = SKShapeNode(circleOfRadius: 10)
             node.position = charge.CGPCoord()
-            node.fillColor = UIColor.blue
+            if charge.q < 0{
+                node.fillColor = UIColor.red
+            } else {
+                node.fillColor = UIColor.blue
+            }
             self.addChild(node)
         }
     }
@@ -56,8 +60,7 @@ class GameScene: SKScene {
                 var inten = u.intensity(coord: point.vectorCoord())
                 
                 inten = inten
-                    .div( inten.mod( Vector(x: 0, y: 0)) )
-                    .mult(32)
+                    .div( inten.mod( Vector(x: 0, y: 0)) * 0.01)
                     .div(2)
                 
                 res.append(
@@ -88,7 +91,7 @@ class GameScene: SKScene {
         
         setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
         u.setPoints(points: charges +
-                    [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
+                    [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 3)]
         )
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
@@ -109,7 +112,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         self.removeAllChildren()
         u.resetPoints(points: charges +
-                      [Point(x: mainCharge.position.x , y: mainCharge.position.y)]
+                      [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 3)]
         )
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
