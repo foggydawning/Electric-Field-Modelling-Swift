@@ -13,21 +13,29 @@ class GameScene: SKScene {
     var mainCharge: SKShapeNode!
     var u: InteractionField! = InteractionField()
     let charges: [Point] = [
-//        Point(x: 400, y: 250),
-//        Point(x: 400, y: 200),
-//        Point(x: 400, y: 150),
-//        Point(x: 400, y: 100),
-//        Point(x: 400, y: 50),
-//        Point(x: 400, y: 0),
-//        Point(x: 400, y: -50),
-//        Point(x: 400, y: -100),
-//        Point(x: 400, y: -150),
-//        Point(x: 400, y: -200),
-//        Point(x: 400, y: -250)
+        Point(x: 400, y: 250),
+        Point(x: 400, y: 200),
+        Point(x: 400, y: 150),
+        Point(x: 400, y: 100),
+        Point(x: 400, y: 50),
+        Point(x: 400, y: 0),
+        Point(x: 400, y: -50),
+        Point(x: 400, y: -100),
+        Point(x: 400, y: -150),
+        Point(x: 400, y: -200),
+        Point(x: 400, y: -250),
         
-        Point(x: -300, y: -300, q: -1),
-        Point(x: 300, y: 300)
-//        Point(x: -200, y: 200, q: 10.0)
+        Point(x: -400, y: 250, q: -1),
+        Point(x: -400, y: 200, q: -1),
+        Point(x: -400, y: 150, q: -1),
+        Point(x: -400, y: 100, q: -1),
+        Point(x: -400, y: 50, q: -1),
+        Point(x: -400, y: 0, q: -1),
+        Point(x: -400, y: -50, q: -1),
+        Point(x: -400, y: -100, q: -1),
+        Point(x: -400, y: -150, q: -1),
+        Point(x: -400, y: -200, q: -1),
+        Point(x: -400, y: -250, q: -1)
     ]
     
     
