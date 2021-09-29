@@ -40,14 +40,15 @@ class GameScene: SKScene {
     
     func setCharges(charges: [Point]){
         for charge in charges{
-            let node = SKShapeNode(circleOfRadius: 10)
-            node.position = charge.CGPCoord()
-            node.glowWidth = 5.0
+            
+            let node: SKSpriteNode!
             if charge.q < 0{
-                node.fillColor = UIColor.red
+                node = SKSpriteNode(imageNamed: "electric ball blue")
             } else {
-                node.fillColor = UIColor.blue
+                node = SKSpriteNode(imageNamed: "electric ball red")
             }
+            node.size = CGSize(width: 60, height: 60)
+            node.position = charge.CGPCoord()
             self.addChild(node)
         }
     }
