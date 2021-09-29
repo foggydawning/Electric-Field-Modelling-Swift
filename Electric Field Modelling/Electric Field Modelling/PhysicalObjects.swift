@@ -11,7 +11,6 @@ import UIKit
 class Vector{
     var x: Double
     var y: Double
-    var dim: Int = 2
     var coord: CGPoint{
         CGPoint(x: x, y: y)
     }
@@ -52,6 +51,10 @@ class Vector{
             0.5
         )
     }
+    
+    func module() -> Double{
+        sqrt(pow(x, 2) + pow(y, 2))
+    }
 }
 
 class Point{
@@ -72,11 +75,26 @@ class Point{
     }
 }
 
+class Ring{
+    var outerRadius, width: Double
+    var center: CGPoint
+    var innerRadius: Double {
+        outerRadius - width
+    }
+    
+    init(center: CGPoint, outerRadius: Double, width: Double){
+        self.center = center
+        self.outerRadius = outerRadius
+        self.width = width
+    }
+}
+
+
 class InteractionField{
     var points: [Point] = []
     
     func F(p1: Point, p2: Point, distance: Double) -> Double {
-        ( 300000 * (-1.0) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
+        ( 9 * pow(10,9) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
     }
     
     func intensity(coord: Vector) -> Vector{
@@ -90,7 +108,7 @@ class InteractionField{
             let dif = pointCoordinate.mod(coord)
             let fmod = self.F(p1: single_point,
                               p2: Point(x: pointCoordinate.x, y: pointCoordinate.y, q: point.q),
-                              distance: dif) * (-1)
+                              distance: dif)
             proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
         }
         return proj

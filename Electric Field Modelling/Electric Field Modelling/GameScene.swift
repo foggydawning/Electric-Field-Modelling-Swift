@@ -9,40 +9,40 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+
+    let screenWidth: Double = UIScreen.main.bounds.width
+    let screenHeight: Double = UIScreen.main.bounds.height
     
-    var mainCharge: SKShapeNode!
-    var u: InteractionField! = InteractionField()
-    let charges: [Point] = [
-        Point(x: 400, y: 250),
-        Point(x: 400, y: 200),
-        Point(x: 400, y: 150),
-        Point(x: 400, y: 100),
-        Point(x: 400, y: 50),
-        Point(x: 400, y: 0),
-        Point(x: 400, y: -50),
-        Point(x: 400, y: -100),
-        Point(x: 400, y: -150),
-        Point(x: 400, y: -200),
-        Point(x: 400, y: -250),
-        
-        Point(x: -400, y: 250, q: -1),
-        Point(x: -400, y: 200, q: -1),
-        Point(x: -400, y: 150, q: -1),
-        Point(x: -400, y: 100, q: -1),
-        Point(x: -400, y: 50, q: -1),
-        Point(x: -400, y: 0, q: -1),
-        Point(x: -400, y: -50, q: -1),
-        Point(x: -400, y: -100, q: -1),
-        Point(x: -400, y: -150, q: -1),
-        Point(x: -400, y: -200, q: -1),
-        Point(x: -400, y: -250, q: -1)
-    ]
+    /// coofficient to translate cm to points
+    var sizeCoefficient: Double {screenWidth/28}
     
+    /// charges in batteries
+    var charges: [Point] {createCharges()}
+    
+    /// ring as physical object
+    var ring: Ring!
+    /// ring as node
+    var ringNode: SKShapeNode! = SKShapeNode()
+    
+    /// electric field
+    var field: InteractionField! = InteractionField() // field
+    
+    func createCharges() -> [Point]{
+        var charges: [Point] = []
+        for y in stride(from: -18*sizeCoefficient/2, to: 18*sizeCoefficient/2, by: 60){
+            charges.append(Point(x: -screenWidth/2 + 50, y: y + 10))
+        }
+        for y in stride(from: -18*sizeCoefficient/2, to: 18*sizeCoefficient/2, by: 60){
+            charges.append(Point(x: screenWidth/2 - 50, y: y + 10, q: -1))
+        }
+        return charges
+    }
     
     func setCharges(charges: [Point]){
         for charge in charges{
             let node = SKShapeNode(circleOfRadius: 10)
             node.position = charge.CGPCoord()
+            node.glowWidth = 5.0
             if charge.q < 0{
                 node.fillColor = UIColor.red
             } else {
@@ -52,20 +52,29 @@ class GameScene: SKScene {
         }
     }
     
+    func setRing(){
+        ring = Ring(center: CGPoint(x: 0, y: 0),
+                             outerRadius: 7*sizeCoefficient,
+                             width: 1*sizeCoefficient)
+    }
     
-    func setMainCharge(mainChargeCoordinates: CGPoint){
-        mainCharge = SKShapeNode(circleOfRadius: 20)
-        mainCharge.position = mainChargeCoordinates
-        mainCharge.fillColor = UIColor.blue
+    func createRingNode(_ ring: Ring){
+        ringNode = SKShapeNode(circleOfRadius: ring.innerRadius)
+        ringNode.lineWidth = ring.width
+        ringNode.strokeTexture =  SKTexture(imageNamed: "metal")
     }
     
     
+    /// get a set of coordinates for drawing field strength lines
     func getInten() -> [[CGPoint]] {
         var res: [[CGPoint]] = []
-        for x in stride(from: -500.0, to: 520.0, by: 20){
-            for y in stride(from: -400.0, to: 400.0, by: 20){
+        for x in stride(from: -screenWidth/2, to: screenWidth/2, by: 21){
+            for y in stride(from: -screenHeight/2, to: screenHeight/2, by: 21){
+                if pow(ringNode.position.x - x, 2) + pow(ringNode.position.y - y, 2) <= pow(ring.outerRadius-7,2){
+                    continue
+                }
                 let point: Point = Point(x: x, y: y)
-                var inten = u.intensity(coord: point.vectorCoord())
+                var inten = field.intensity(coord: point.vectorCoord())
                 
                 inten = inten
                     .div( inten.mod( Vector(x: 0, y: 0)) * 0.01)
@@ -81,6 +90,7 @@ class GameScene: SKScene {
     }
     
     
+    /// drawing field strength lines
     func drawLines(res: [[CGPoint]]){
         for _points in res{
             var points = _points
@@ -91,40 +101,38 @@ class GameScene: SKScene {
             self.addChild(node)
         }
     }
-
+    
     
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody?.isDynamic = false
+
+        setRing()
+        createRingNode(ring)
         
-        setMainCharge(mainChargeCoordinates: CGPoint(x: 0, y: 0))
-        u.setPoints(points: charges +
-                    [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 3)]
-        )
+        field.setPoints(points: charges)
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
         setCharges(charges: charges)
-        self.addChild(mainCharge)
+        self.addChild(ringNode)
     }
     
-
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let touchLocation = touch.location(in: self)
-            mainCharge.position.x = touchLocation.x
-            mainCharge.position.y = touchLocation.y
+            ringNode.position.x = touchLocation.x
+            ringNode.position.y = touchLocation.y
         }
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         self.removeAllChildren()
-        u.resetPoints(points: charges +
-                      [Point(x: mainCharge.position.x , y: mainCharge.position.y, q: 3)]
-        )
+        field.resetPoints(points: charges)
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
         setCharges(charges: charges)
-        self.addChild(mainCharge)
+        self.addChild(ringNode)
     }
 }
