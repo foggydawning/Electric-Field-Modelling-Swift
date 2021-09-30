@@ -10,8 +10,10 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-    let screenWidth: Double = UIScreen.main.bounds.width
-    let screenHeight: Double = UIScreen.main.bounds.height
+    var equipotentialMode: Bool = false
+    
+    let screenWidth: Double = UIScreen.main.bounds.width*0.7
+    let screenHeight: Double = UIScreen.main.bounds.height*0.8
     
     /// coofficient to translate cm to points
     var sizeCoefficient: Double {screenWidth/28}
@@ -25,7 +27,7 @@ class GameScene: SKScene {
     var ringNode: SKShapeNode! = SKShapeNode()
     
     /// electric field
-    var field: InteractionField! = InteractionField() // field
+    var field: InteractionField! = InteractionField()
     
     func createCharges() -> [Point]{
         var charges: [Point] = []
@@ -63,22 +65,28 @@ class GameScene: SKScene {
         ringNode = SKShapeNode(circleOfRadius: ring.innerRadius)
         ringNode.lineWidth = ring.width
         ringNode.strokeTexture =  SKTexture(imageNamed: "metal")
+        ringNode.name = "ring"
+        if equipotentialMode{
+            ringNode.glowWidth = 5
+        }
     }
     
     
     /// get a set of coordinates for drawing field strength lines
     func getInten() -> [[CGPoint]] {
         var res: [[CGPoint]] = []
-        for x in stride(from: -screenWidth/2, to: screenWidth/2, by: 21){
-            for y in stride(from: -screenHeight/2, to: screenHeight/2, by: 21){
-                if pow(ringNode.position.x - x, 2) + pow(ringNode.position.y - y, 2) <= pow(ring.outerRadius-7,2){
+        for x in stride(from: -screenWidth/2, to: screenWidth/2, by: 17){
+            for y in stride(from: -screenHeight/2, to: screenHeight/2, by: 15){
+                if pow(ringNode.position.x - x, 2)
+                    + pow(ringNode.position.y - y, 2)
+                    <= pow(ring.outerRadius-7,2){
                     continue
                 }
                 let point: Point = Point(x: x, y: y)
                 var inten = field.intensity(coord: point.vectorCoord())
                 
                 inten = inten
-                    .div( inten.mod( Vector(x: 0, y: 0)) * 0.01)
+                    .div( inten.mod( Vector(x: 0, y: 0)) * 0.03)
                     .div(2)
                 
                 res.append(
@@ -88,6 +96,42 @@ class GameScene: SKScene {
                 }
             }
         return res
+    }
+    
+    func getEquipotential(){
+        for y in stride(from: -screenHeight/2, to: screenHeight/2+10, by: 2){
+            for x in stride(from: -screenWidth/2, to: screenHeight/2+10, by: 2){
+                if pow(ringNode.position.x - x, 2)
+                    + pow(ringNode.position.y - y, 2)
+                    <= pow(ring.outerRadius-7,2){
+                    continue
+                }
+                let point: Point = Point(x: x, y: y)
+                let potential = abs(field.equipotential(coord: point.vectorCoord()))
+                
+                if  -0.01 < potential && potential < 0.01 ||
+                    0.98 < potential && potential < 1.02 ||
+                    9.98 < potential && potential < 10.02 ||
+                    19.97 < potential && potential < 20.03 ||
+                    29.9 < potential && potential < 30.1 ||
+                    39.80 < potential && potential < 40.20 ||
+                    44.80 <= potential && potential <= 45.20 ||
+                    49.80 <= potential && potential <= 50.20 ||
+                    54.80 <= potential && potential <= 55.20 ||
+                    59.92 <= potential && potential <= 60.08 ||
+                    69.8 <= potential && potential <= 70.2 ||
+                    79.78 <= potential && potential <= 80.22 ||
+                    89.56 <= potential && potential <= 90.42 ||
+                        99 <= potential && potential <= 101
+                {
+                    let node = SKShapeNode(circleOfRadius: 3)
+                    node.position = CGPoint(x: x, y: y)
+                    node.fillColor = .purple
+                    node.glowWidth = 1
+                    self.addChild(node)
+                }
+            }
+        }
     }
     
     
@@ -103,11 +147,27 @@ class GameScene: SKScene {
         }
     }
     
+    func setButton(){
+        let node = SKShapeNode(rect: CGRect(origin: CGPoint(x: 428, y: 268), size: CGSize(width: 50, height: 50)), cornerRadius: 5)
+        
+        node.fillColor = .purple
+        node.strokeColor = .purple
+        node.glowWidth = 3
+        node.lineWidth = 4
+        node.name = "mybutton"
+        if equipotentialMode{
+            node.glowWidth = 4
+            node.strokeColor = .white
+        }
+        self.addChild(node)
+    }
+    
     
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody?.isDynamic = false
 
+        setButton()
         setRing()
         createRingNode(ring)
         
@@ -118,22 +178,43 @@ class GameScene: SKScene {
         self.addChild(ringNode)
     }
     
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches{
             let touchLocation = touch.location(in: self)
-            ringNode.position.x = touchLocation.x
-            ringNode.position.y = touchLocation.y
+            let someNode = self.atPoint(touchLocation)
+            if someNode.name == "mybutton"{
+                equipotentialMode.toggle()
+            }
         }
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if equipotentialMode == false{
+            for touch in touches {
+                let touchLocation = touch.location(in: self)
+                let someNode: some SKNode = self.atPoint(touchLocation)
+                if someNode.name == "ring"{
+                    ringNode.position.x = touchLocation.x
+                    ringNode.position.y = touchLocation.y
+                }
+            }
+        }
+    }
+
+    
     
     override func update(_ currentTime: TimeInterval) {
+    
         self.removeAllChildren()
         field.resetPoints(points: charges)
         let res: [[CGPoint]] = getInten()
         drawLines(res: res)
+        setButton()
         setCharges(charges: charges)
         self.addChild(ringNode)
+        if equipotentialMode{
+            getEquipotential()
+        }
+        
     }
 }

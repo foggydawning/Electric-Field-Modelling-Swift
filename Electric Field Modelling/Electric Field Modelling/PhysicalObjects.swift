@@ -91,27 +91,39 @@ class Ring{
 
 
 class InteractionField{
-    var points: [Point] = []
+    private var points: [Point] = []
     
-    func F(p1: Point, p2: Point, distance: Double) -> Double {
-        ( 9 * pow(10,9) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
+    func F(p1: Point, distance: Double) -> Double {
+        p1.q / (pow(distance, 2) + 0.0001)
     }
     
     func intensity(coord: Vector) -> Vector{
-        var proj = Vector(x: 0, y: 0)
-        let single_point = Point(x: 0, y: 0)
+        var inten: Vector = Vector(x: 0, y: 0)
         for point in self.points{
-            let pointCoordinate = point.vectorCoord()
-            if coord.mod(pointCoordinate) < pow(10, -10){
+            let pointCoordinates = point.vectorCoord()
+            if coord.mod(pointCoordinates) < pow(10, -10){
                 continue
             }
-            let dif = pointCoordinate.mod(coord)
-            let fmod = self.F(p1: single_point,
-                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y, q: point.q),
+            let dif = pointCoordinates.mod(coord)
+            let fmod = self.F(p1: point,
                               distance: dif)
-            proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
+            inten = coord
+                .diff(pointCoordinates)
+                .div(dif)
+                .mult(fmod)
+                .add(inten)
         }
-        return proj
+        return inten
+    }
+    
+    func equipotential(coord: Vector) -> Double{
+        var potencial: Double = 0
+        for point in self.points{
+            let pointCoordinates = point.vectorCoord()
+            let dif = pointCoordinates.mod(coord)
+            potencial += point.q / (dif + 0.0001) * 1000
+        }
+        return potencial
     }
     
     func setPoints(points: [Point]) {
