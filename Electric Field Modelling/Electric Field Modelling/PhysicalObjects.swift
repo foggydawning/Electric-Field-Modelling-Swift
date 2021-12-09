@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class Vector{
     var x: Double
@@ -39,6 +40,9 @@ class Vector{
     }
     
     func div(_ number: Double) -> Vector{
+        guard number != 0.0 else{
+            return Vector(x: 0, y: 0)
+        }
         let new_x = self.x / number
         let new_y = self.y / number
         return Vector(x: new_x, y: new_y)
@@ -57,7 +61,7 @@ class Vector{
     }
 }
 
-class Point{
+class Charge{
     var x, y, q: Double
 
     func vectorCoord() -> Vector{
@@ -75,53 +79,70 @@ class Point{
     }
 }
 
-class Ring{
-    var outerRadius, width: Double
-    var center: CGPoint
-    var innerRadius: Double {
-        outerRadius - width
-    }
-    
-    init(center: CGPoint, outerRadius: Double, width: Double){
-        self.center = center
-        self.outerRadius = outerRadius
-        self.width = width
-    }
-}
+//class Ring{
+//    var outerRadius, width: Double
+//    var center: CGPoint
+//    var innerRadius: Double {
+//        outerRadius - width
+//    }
+//
+//    init(center: CGPoint, outerRadius: Double, width: Double){
+//        self.center = center
+//        self.outerRadius = outerRadius
+//        self.width = width
+//    }
+//}
 
 
 class InteractionField{
-    var points: [Point] = []
     
-    func F(p1: Point, p2: Point, distance: Double) -> Double {
-        ( 9 * pow(10,9) * p1.q * p2.q ) / (pow(distance, 2) + 0.1)
+    private weak var gameScene: MainGameScene?
+    
+    func setGameScete(gS: MainGameScene){
+        self.gameScene = gS
+    }
+    
+    func F(p1: Charge, distance: Double) -> Double {
+        p1.q / (pow(distance, 2) + 0.0001)
     }
     
     func intensity(coord: Vector) -> Vector{
-        var proj = Vector(x: 0, y: 0)
-        let single_point = Point(x: 0, y: 0)
-        for point in self.points{
-            let pointCoordinate = point.vectorCoord()
-            if coord.mod(pointCoordinate) < pow(10, -10){
+        guard let charges = self.gameScene?.charges else {
+            return Vector(x: 0, y: 0)
+        }
+        var inten: Vector = Vector(x: 0, y: 0)
+        for point in charges{
+            let pointCoordinates = point.vectorCoord()
+            if coord.mod(pointCoordinates) < pow(10, -10){
                 continue
             }
-            let dif = pointCoordinate.mod(coord)
-            let fmod = self.F(p1: single_point,
-                              p2: Point(x: pointCoordinate.x, y: pointCoordinate.y, q: point.q),
+            let dif = pointCoordinates.mod(coord)
+            let fmod = self.F(p1: point,
                               distance: dif)
-            proj = coord.diff(pointCoordinate).div(dif).mult(fmod).add(proj)
+            inten = coord
+                .diff(pointCoordinates)
+                .div(dif)
+                .mult(fmod)
+                .add(inten)
         }
-        return proj
+        return inten
     }
     
-    func setPoints(points: [Point]) {
-        for point in points{
-            self.points.append(point)
+    func equipotential(coord: Vector) -> Double{
+        guard let charges = self.gameScene?.charges else {
+            return 0
         }
+        var potencial: Double = 0
+        for point in charges{
+            let pointCoordinates = point.vectorCoord()
+            let dif = pointCoordinates.mod(coord)
+            potencial += point.q / (dif + 0.0001) * 1000
+        }
+        return potencial
     }
     
-    func resetPoints(points: [Point]) {
-        self.points = []
-        setPoints(points: points)
-    }
+//    func resetPoints(points: [Point]) {
+//        self.charges = []
+//        setPoints(points: points)
+//    }
 }

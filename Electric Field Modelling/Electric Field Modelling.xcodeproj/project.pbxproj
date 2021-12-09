@@ -7,32 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D335807C270238CC007E174D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335807B270238CC007E174D /* AppDelegate.swift */; };
-		D335807E270238CC007E174D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D335807D270238CC007E174D /* GameScene.sks */; };
-		D3358080270238CC007E174D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D335807F270238CC007E174D /* Actions.sks */; };
-		D3358082270238CC007E174D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3358081270238CC007E174D /* GameScene.swift */; };
-		D3358084270238CC007E174D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3358083270238CC007E174D /* GameViewController.swift */; };
-		D3358087270238CC007E174D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3358085270238CC007E174D /* Main.storyboard */; };
-		D3358089270238D0007E174D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3358088270238D0007E174D /* Assets.xcassets */; };
-		D335808C270238D0007E174D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D335808A270238D0007E174D /* LaunchScreen.storyboard */; };
-		D34FD3B727024DE0001F7A3D /* PhysicalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */; };
+		D3C4C81227459E1700B5D0D2 /* Electric_Field_ModellingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C81127459E1700B5D0D2 /* Electric_Field_ModellingApp.swift */; };
+		D3C4C81427459E1700B5D0D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C81327459E1700B5D0D2 /* ContentView.swift */; };
+		D3C4C81627459E1800B5D0D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3C4C81527459E1800B5D0D2 /* Assets.xcassets */; };
+		D3C4C81927459E1800B5D0D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3C4C81827459E1800B5D0D2 /* Preview Assets.xcassets */; };
+		D3C4C8212745A10500B5D0D2 /* PhysicalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */; };
+		D3C4C8252746244700B5D0D2 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C8242746244700B5D0D2 /* MainGameScene.swift */; };
+		D3C4C82727462D5200B5D0D2 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C82627462D5200B5D0D2 /* Nodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D3358078270238CC007E174D /* Electric Field Modelling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Electric Field Modelling.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D335807B270238CC007E174D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D335807D270238CC007E174D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		D335807F270238CC007E174D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		D3358081270238CC007E174D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		D3358083270238CC007E174D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		D3358086270238CC007E174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D3358088270238D0007E174D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D335808B270238D0007E174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalObjects.swift; sourceTree = "<group>"; };
+		D3C4C80E27459E1700B5D0D2 /* Electric Field Modelling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Electric Field Modelling.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3C4C81127459E1700B5D0D2 /* Electric_Field_ModellingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Electric_Field_ModellingApp.swift; sourceTree = "<group>"; };
+		D3C4C81327459E1700B5D0D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D3C4C81527459E1800B5D0D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3C4C81827459E1800B5D0D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3C4C81F27459E7200B5D0D2 /* Electric-Field-Modelling-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Electric-Field-Modelling-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalObjects.swift; sourceTree = "<group>"; };
+		D3C4C8242746244700B5D0D2 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
+		D3C4C82627462D5200B5D0D2 /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D3358075270238CC007E174D /* Frameworks */ = {
+		D3C4C80B27459E1700B5D0D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,48 +39,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D335806F270238CC007E174D = {
+		D3C4C80527459E1700B5D0D2 = {
 			isa = PBXGroup;
 			children = (
-				D335807A270238CC007E174D /* Electric Field Modelling */,
-				D3358079270238CC007E174D /* Products */,
+				D3C4C81027459E1700B5D0D2 /* Electric Field Modelling */,
+				D3C4C80F27459E1700B5D0D2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D3358079270238CC007E174D /* Products */ = {
+		D3C4C80F27459E1700B5D0D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D3358078270238CC007E174D /* Electric Field Modelling.app */,
+				D3C4C80E27459E1700B5D0D2 /* Electric Field Modelling.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D335807A270238CC007E174D /* Electric Field Modelling */ = {
+		D3C4C81027459E1700B5D0D2 /* Electric Field Modelling */ = {
 			isa = PBXGroup;
 			children = (
-				D335807B270238CC007E174D /* AppDelegate.swift */,
-				D335807D270238CC007E174D /* GameScene.sks */,
-				D335807F270238CC007E174D /* Actions.sks */,
-				D3358081270238CC007E174D /* GameScene.swift */,
-				D34FD3B627024DE0001F7A3D /* PhysicalObjects.swift */,
-				D3358083270238CC007E174D /* GameViewController.swift */,
-				D3358085270238CC007E174D /* Main.storyboard */,
-				D3358088270238D0007E174D /* Assets.xcassets */,
-				D335808A270238D0007E174D /* LaunchScreen.storyboard */,
+				D3C4C81F27459E7200B5D0D2 /* Electric-Field-Modelling-Info.plist */,
+				D3C4C81127459E1700B5D0D2 /* Electric_Field_ModellingApp.swift */,
+				D3C4C81327459E1700B5D0D2 /* ContentView.swift */,
+				D3C4C8242746244700B5D0D2 /* MainGameScene.swift */,
+				D3C4C82627462D5200B5D0D2 /* Nodes.swift */,
+				D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */,
+				D3C4C81527459E1800B5D0D2 /* Assets.xcassets */,
+				D3C4C81727459E1800B5D0D2 /* Preview Content */,
 			);
 			path = "Electric Field Modelling";
+			sourceTree = "<group>";
+		};
+		D3C4C81727459E1800B5D0D2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D3C4C81827459E1800B5D0D2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D3358077270238CC007E174D /* Electric Field Modelling */ = {
+		D3C4C80D27459E1700B5D0D2 /* Electric Field Modelling */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D335808F270238D0007E174D /* Build configuration list for PBXNativeTarget "Electric Field Modelling" */;
+			buildConfigurationList = D3C4C81C27459E1800B5D0D2 /* Build configuration list for PBXNativeTarget "Electric Field Modelling" */;
 			buildPhases = (
-				D3358074270238CC007E174D /* Sources */,
-				D3358075270238CC007E174D /* Frameworks */,
-				D3358076270238CC007E174D /* Resources */,
+				D3C4C80A27459E1700B5D0D2 /* Sources */,
+				D3C4C80B27459E1700B5D0D2 /* Frameworks */,
+				D3C4C80C27459E1700B5D0D2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -91,25 +95,25 @@
 			);
 			name = "Electric Field Modelling";
 			productName = "Electric Field Modelling";
-			productReference = D3358078270238CC007E174D /* Electric Field Modelling.app */;
+			productReference = D3C4C80E27459E1700B5D0D2 /* Electric Field Modelling.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D3358070270238CC007E174D /* Project object */ = {
+		D3C4C80627459E1700B5D0D2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					D3358077270238CC007E174D = {
-						CreatedOnToolsVersion = 13.0;
+					D3C4C80D27459E1700B5D0D2 = {
+						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
-			buildConfigurationList = D3358073270238CC007E174D /* Build configuration list for PBXProject "Electric Field Modelling" */;
+			buildConfigurationList = D3C4C80927459E1700B5D0D2 /* Build configuration list for PBXProject "Electric Field Modelling" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,66 +121,45 @@
 				en,
 				Base,
 			);
-			mainGroup = D335806F270238CC007E174D;
-			productRefGroup = D3358079270238CC007E174D /* Products */;
+			mainGroup = D3C4C80527459E1700B5D0D2;
+			productRefGroup = D3C4C80F27459E1700B5D0D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D3358077270238CC007E174D /* Electric Field Modelling */,
+				D3C4C80D27459E1700B5D0D2 /* Electric Field Modelling */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D3358076270238CC007E174D /* Resources */ = {
+		D3C4C80C27459E1700B5D0D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3358087270238CC007E174D /* Main.storyboard in Resources */,
-				D335807E270238CC007E174D /* GameScene.sks in Resources */,
-				D3358089270238D0007E174D /* Assets.xcassets in Resources */,
-				D335808C270238D0007E174D /* LaunchScreen.storyboard in Resources */,
-				D3358080270238CC007E174D /* Actions.sks in Resources */,
+				D3C4C81927459E1800B5D0D2 /* Preview Assets.xcassets in Resources */,
+				D3C4C81627459E1800B5D0D2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D3358074270238CC007E174D /* Sources */ = {
+		D3C4C80A27459E1700B5D0D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3358082270238CC007E174D /* GameScene.swift in Sources */,
-				D3358084270238CC007E174D /* GameViewController.swift in Sources */,
-				D335807C270238CC007E174D /* AppDelegate.swift in Sources */,
-				D34FD3B727024DE0001F7A3D /* PhysicalObjects.swift in Sources */,
+				D3C4C82727462D5200B5D0D2 /* Nodes.swift in Sources */,
+				D3C4C81427459E1700B5D0D2 /* ContentView.swift in Sources */,
+				D3C4C8212745A10500B5D0D2 /* PhysicalObjects.swift in Sources */,
+				D3C4C81227459E1700B5D0D2 /* Electric_Field_ModellingApp.swift in Sources */,
+				D3C4C8252746244700B5D0D2 /* MainGameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		D3358085270238CC007E174D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3358086270238CC007E174D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D335808A270238D0007E174D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D335808B270238D0007E174D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		D335808D270238D0007E174D /* Debug */ = {
+		D3C4C81A27459E1800B5D0D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -237,7 +220,7 @@
 			};
 			name = Debug;
 		};
-		D335808E270238D0007E174D /* Release */ = {
+		D3C4C81B27459E1800B5D0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -292,23 +275,23 @@
 			};
 			name = Release;
 		};
-		D3358090270238D0007E174D /* Debug */ = {
+		D3C4C81D27459E1800B5D0D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Electric Field Modelling/Preview Content\"";
 				DEVELOPMENT_TEAM = M52WLQFE2R;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Electric-Field-Modelling-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -318,27 +301,27 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
-		D3358091270238D0007E174D /* Release */ = {
+		D3C4C81E27459E1800B5D0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Electric Field Modelling/Preview Content\"";
 				DEVELOPMENT_TEAM = M52WLQFE2R;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Electric-Field-Modelling-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -348,32 +331,32 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D3358073270238CC007E174D /* Build configuration list for PBXProject "Electric Field Modelling" */ = {
+		D3C4C80927459E1700B5D0D2 /* Build configuration list for PBXProject "Electric Field Modelling" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D335808D270238D0007E174D /* Debug */,
-				D335808E270238D0007E174D /* Release */,
+				D3C4C81A27459E1800B5D0D2 /* Debug */,
+				D3C4C81B27459E1800B5D0D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D335808F270238D0007E174D /* Build configuration list for PBXNativeTarget "Electric Field Modelling" */ = {
+		D3C4C81C27459E1800B5D0D2 /* Build configuration list for PBXNativeTarget "Electric Field Modelling" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D3358090270238D0007E174D /* Debug */,
-				D3358091270238D0007E174D /* Release */,
+				D3C4C81D27459E1800B5D0D2 /* Debug */,
+				D3C4C81E27459E1800B5D0D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D3358070270238CC007E174D /* Project object */;
+	rootObject = D3C4C80627459E1700B5D0D2 /* Project object */;
 }
