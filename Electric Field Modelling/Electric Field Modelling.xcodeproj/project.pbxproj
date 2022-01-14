@@ -13,7 +13,6 @@
 		D3C4C81927459E1800B5D0D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3C4C81827459E1800B5D0D2 /* Preview Assets.xcassets */; };
 		D3C4C8212745A10500B5D0D2 /* PhysicalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */; };
 		D3C4C8252746244700B5D0D2 /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C8242746244700B5D0D2 /* MainGameScene.swift */; };
-		D3C4C82727462D5200B5D0D2 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4C82627462D5200B5D0D2 /* Nodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		D3C4C81F27459E7200B5D0D2 /* Electric-Field-Modelling-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Electric-Field-Modelling-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalObjects.swift; sourceTree = "<group>"; };
 		D3C4C8242746244700B5D0D2 /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
-		D3C4C82627462D5200B5D0D2 /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 				D3C4C81127459E1700B5D0D2 /* Electric_Field_ModellingApp.swift */,
 				D3C4C81327459E1700B5D0D2 /* ContentView.swift */,
 				D3C4C8242746244700B5D0D2 /* MainGameScene.swift */,
-				D3C4C82627462D5200B5D0D2 /* Nodes.swift */,
 				D3C4C8202745A10500B5D0D2 /* PhysicalObjects.swift */,
 				D3C4C81527459E1800B5D0D2 /* Assets.xcassets */,
 				D3C4C81727459E1800B5D0D2 /* Preview Content */,
@@ -148,7 +145,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3C4C82727462D5200B5D0D2 /* Nodes.swift in Sources */,
 				D3C4C81427459E1700B5D0D2 /* ContentView.swift in Sources */,
 				D3C4C8212745A10500B5D0D2 /* PhysicalObjects.swift in Sources */,
 				D3C4C81227459E1700B5D0D2 /* Electric_Field_ModellingApp.swift in Sources */,
