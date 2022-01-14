@@ -141,10 +141,7 @@ class MainGameScene: SKScene, ElFieldModelMainScene, ObservableObject {
         
     }
     
-//    func changeChargesCoordinate(numberOfCharge: Int, coord: CGPoint){
-//        charges[numberOfCharge].x = coord.x
-//        charges[numberOfCharge].y = coord.y
-//    }
+
     func getEquipotential(){
         for y in stride(from: 25.0, to: size.height-25, by: 2){
             for x in stride(from: 25, to: size.width-25, by: 2){

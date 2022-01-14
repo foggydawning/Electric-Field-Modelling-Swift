@@ -79,20 +79,6 @@ class Charge{
     }
 }
 
-//class Ring{
-//    var outerRadius, width: Double
-//    var center: CGPoint
-//    var innerRadius: Double {
-//        outerRadius - width
-//    }
-//
-//    init(center: CGPoint, outerRadius: Double, width: Double){
-//        self.center = center
-//        self.outerRadius = outerRadius
-//        self.width = width
-//    }
-//}
-
 
 class InteractionField{
     
@@ -140,9 +126,4 @@ class InteractionField{
         }
         return potencial
     }
-    
-//    func resetPoints(points: [Point]) {
-//        self.charges = []
-//        setPoints(points: points)
-//    }
 }
