@@ -8,19 +8,18 @@
 import SwiftUI
 import SpriteKit
 
+
+
 struct ContentView: View {
-    
-    var mainGameScene: SKScene = { (_ screenSize: CGSize) -> SKScene in
-        let scene = MainGameScene(size: UIScreen.main.bounds.size)
-        scene.size = CGSize(width: screenSize.width,
-                            height: screenSize.height-70)
-        return scene
-    }(UIScreen.main.bounds.size)
+    var mainGameScene: MainGameScene = .init(
+        size: .init(width: UIScreen.main.bounds.size.width,
+                    height: UIScreen.main.bounds.size.height-70)
+    )
     
     var body: some View {
         VStack(spacing: 0){
-            SpriteView(scene: mainGameScene)
-            ControlElements()
+            SpriteView(scene: mainGameScene, preferredFramesPerSecond: 60)
+            ControlElements(mainGameScene: mainGameScene )
         }
         .ignoresSafeArea()
     }
@@ -34,13 +33,31 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct ControlElements: View {
+    let mainGameScene: MainGameScene
     var body: some View {
         ZStack{
             Rectangle().foregroundColor(.gray)
-//            Button(action: {print("changed")})
-//            {
-//                Text("Show equipotential lines")
-//            }
+            Button(action: {},
+                   label: {
+                Text("Show equipotential lines")
+                    .foregroundColor(.black)
+                
+            })
+                .simultaneousGesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged({ _ in
+                                if !mainGameScene.isPaused {
+                                    mainGameScene.getEquipotential()
+                                }
+                                mainGameScene.isPaused = true
+                                
+                            })
+                            
+                            .onEnded({ _ in
+                                mainGameScene.isPaused = false
+                                mainGameScene.afterPaused()
+                            })
+                        )
         }
         .frame(height: 70)
     }
